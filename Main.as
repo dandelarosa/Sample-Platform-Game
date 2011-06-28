@@ -15,7 +15,7 @@ package
 		{
 		    // For a game like a platformer we want have to a fixed framerate
 		    // so that collision detection can be more precise.
-			super(640,480,60,true);
+			super(256, 224, 60, true);
 		}
 		
 		/**
@@ -24,7 +24,8 @@ package
 		override public function init():void 
 		{	
 			FP.screen.color = 0x222233;
-			FP.world=new PlatformWorld();
+			FP.screen.scale = 2;
+			FP.world = new PlatformWorld();
 			
 			// Invoke the MochiBot tracker
 			MochiBot.track(this, "6f3254be");

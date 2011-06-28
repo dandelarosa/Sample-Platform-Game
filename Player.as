@@ -11,14 +11,14 @@ package
 	 */
 	public class Player extends Entity 
 	{
-		private var power:Number=0.2;
-		private var jumpPower:Number=10;
-		private var hFriction:Number=0.95;
-		private var vFriction:Number=0.99;
-		private var xSpeed:Number=0;
-		private var ySpeed:Number=0;
-		private var onTheGround:Boolean=false;
-		private var gravity:Number=0.3;
+		private var power:Number = 0.2;
+		private var jumpPower:Number = 10;
+		private var hFriction:Number = 0.95;
+		private var vFriction:Number = 0.99;
+		private var xSpeed:Number = 0;
+		private var ySpeed:Number = 0;
+		private var onTheGround:Boolean = false;
+		private var gravity:Number = 0.3;
 		
 		// Embed player graphics
 		[Embed(source='assets/player.png')]
@@ -27,12 +27,12 @@ package
 		/**
 		 * Constructor
 		 */
-		public function Player() 
+		public function Player(x:Number, y:Number) 
 		{
-			graphic=new Image(PLAYER);
+			graphic = new Image(PLAYER);
 			setHitbox(13,26);
-			x=305;
-			y=225;
+			this.x = x;
+			this.y = y;
 		}
 		
 		/**
@@ -41,38 +41,38 @@ package
 		override public function update():void 
 		{
 		    // To calculate new x velocity
-			var pressed:Boolean=false;
+			var pressed:Boolean = false;
 			if (Input.check(Key.LEFT)) 
 			{
-				xSpeed-=power;
-				pressed=true;
+				xSpeed -= power;
+				pressed = true;
 			}
 			if (Input.check(Key.RIGHT)) 
 			{
-				xSpeed+=power;
-				pressed=true;
+				xSpeed += power;
+				pressed = true;
 			}
-			if (Math.abs(xSpeed)<1&&! pressed) 
+			if (Math.abs(xSpeed) < 1 && !pressed) 
 			{
-				xSpeed=0;
+				xSpeed = 0;
 			}
-			xSpeed*=hFriction;
+			xSpeed *= hFriction;
 			
 			// Calculate new y velocity
-			if (collide("wall",x,y+1)) 
+			if (collide("wall", x, y + 1)) 
 			{
-				onTheGround=true;
-				ySpeed=0;
+				onTheGround = true;
+				ySpeed = 0;
 				if (Input.check(Key.UP)) 
 				{
-					ySpeed-=jumpPower;
+					ySpeed -= jumpPower;
 				}
 			} 
 			else 
 			{
-				ySpeed+=gravity;
+				ySpeed += gravity;
 			}
-			ySpeed*=vFriction;
+			ySpeed *=v Friction;
 			
 			// Apply new speed, taking account collisions with walls
 			moveBy(xSpeed, ySpeed, "wall");

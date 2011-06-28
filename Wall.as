@@ -17,11 +17,11 @@ package
 		 */
 		public function Wall(posX:int,posY:int) 
 		{
-			graphic=new Image(WALL);
-			setHitbox(32,32);
-			type="wall"; 
-			x=posX*32;
-			y=posY*32;
+			graphic = new Image(WALL);
+			setHitbox(32, 32);
+			type = "wall"; 
+			x = posX * 32;
+			y = posY * 32;
 		}
 	}
 }
