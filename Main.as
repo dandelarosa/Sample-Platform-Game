@@ -26,9 +26,9 @@ package
 		 */
 		override public function init():void 
 		{	
-			FP.screen.color = 0x222233;
+			FP.screen.color = 0x332222;
 			FP.screen.scale = 2;
-			FP.world = new PlatformWorld();
+			FP.world = new TitleScreen();
 			
 			// Invoke the MochiBot tracker
 			MochiBot.track(this, "6f3254be");
