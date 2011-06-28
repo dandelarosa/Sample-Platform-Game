@@ -2,6 +2,7 @@ package
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.FP;
@@ -17,22 +18,27 @@ package
 		private var vFriction:Number = 0.99;
 		private var xSpeed:Number = 0;
 		private var ySpeed:Number = 0;
-		private var onTheGround:Boolean = false;
+		//private var onTheGround:Boolean = false;
 		private var gravity:Number = 0.3;
+		private var isJumping:Boolean=false;
+		private var doubleJump:Boolean=false;
 		
 		// Embed player graphics
 		[Embed(source='assets/player.png')]
 		private const PLAYER:Class;
+		private var playerSprite:Spritemap = new Spritemap(PLAYER,13,26);
 		
 		/**
 		 * Constructor
 		 */
 		public function Player(x:Number, y:Number) 
 		{
-			graphic = new Image(PLAYER);
 			setHitbox(13,26);
 			this.x = x;
 			this.y = y;
+			playerSprite.add("goingLeft", [0], 1, false);
+			playerSprite.add("goingRight", [1], 1, false);
+			graphic = playerSprite;
 		}
 		
 		/**
@@ -59,23 +65,43 @@ package
 			xSpeed *= hFriction;
 			
 			// Calculate new y velocity
-			if (collide("wall", x, y + 1)) 
+			if(!Input.check(Key.UP) && isJumping)
 			{
-				onTheGround = true;
+				doubleJump=true;
+			}
+			if(Input.check(Key.UP) && doubleJump && isJumping){
+				ySpeed = -jumpPower;
+				isJumping = false;
+				doubleJump = false;
+			}
+			if (collide("wall", x, y + 1))
+			{
 				ySpeed = 0;
-				if (Input.check(Key.UP)) 
+				isJumping = false;
+				if (Input.check(Key.UP))
 				{
-					ySpeed -= jumpPower;
+					ySpeed =- jumpPower;
+					isJumping = true;
 				}
-			} 
-			else 
+			}
+			else
 			{
 				ySpeed += gravity;
 			}
-			ySpeed *=v Friction;
+			ySpeed *= vFriction;
 			
 			// Apply new speed, taking account collisions with walls
 			moveBy(xSpeed, ySpeed, "wall");
+			
+			// Apply new image
+			if(xSpeed > 0)
+			{
+				playerSprite.play("goingRight");
+			}
+			if(xSpeed < 0)
+			{
+				playerSprite.play("goingLeft");
+			}
 		}
 		
 		/*

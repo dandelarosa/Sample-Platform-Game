@@ -3,6 +3,9 @@ package
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
 	
+	// SWF Export attributes
+	[SWF(width = "512", height = "448", frameRate = "60")]
+	
 	/**
 	 * Platformer Engine
 	 */
