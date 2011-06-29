@@ -20,7 +20,7 @@ package {
 		    // Add top and bottom walls
 		    for (var i:int = 0; i < 7; i++) 
 			{
-				add(new Wall(i, 0));
+				//add(new Wall(i, 0));
 				add(new Wall(i, 6));
 			}
 			

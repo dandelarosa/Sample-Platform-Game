@@ -17,11 +17,9 @@ package
 		private var vFriction:Number = 0.99;
 		private var xSpeed:Number = 0;
 		private var ySpeed:Number = 0;
-		//private var onTheGround:Boolean = false;
 		private var gravity:Number = 0.3;
-		// TODO implement multiple jumps (not just double jump)
-		private var isJumping:Boolean = false;
-		private var doubleJump:Boolean = false;
+		private var extraJumps:int = 0;
+		private var maxExtraJumps:int = 2;
 		private var playerSprite:Spritemap = null;
 		
 		/**
@@ -62,27 +60,27 @@ package
 			xSpeed *= hFriction;
 			
 			// Calculate new y velocity
-			if(!Input.check(Key.UP) && isJumping)
-			{
-				doubleJump=true;
-			}
-			if(Input.check(Key.UP) && doubleJump && isJumping){
-				ySpeed = -jumpPower;
-				isJumping = false;
-				doubleJump = false;
-			}
 			if (collide("wall", x, y + 1))
 			{
+			    // Player is on the ground
 				ySpeed = 0;
-				isJumping = false;
-				if (Input.check(Key.UP))
+				extraJumps = 0;
+				
+				// Player jumps from ground
+				if (Input.pressed(Key.UP))
 				{
-					ySpeed =- jumpPower;
-					isJumping = true;
+					ySpeed = -jumpPower;
 				}
+			}
+			else if (Input.pressed(Key.UP) && extraJumps < maxExtraJumps)
+			{
+			    // Jump in mid-air (if allowed to)
+				ySpeed = -jumpPower;
+				extraJumps++;
 			}
 			else
 			{
+			    // In all other cases, just free-fall
 				ySpeed += gravity;
 			}
 			ySpeed *= vFriction;
