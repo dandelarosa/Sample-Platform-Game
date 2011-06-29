@@ -1,7 +1,6 @@
 package 
 {
 	import net.flashpunk.Entity;
-	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
@@ -20,13 +19,10 @@ package
 		private var ySpeed:Number = 0;
 		//private var onTheGround:Boolean = false;
 		private var gravity:Number = 0.3;
-		private var isJumping:Boolean=false;
-		private var doubleJump:Boolean=false;
-		
-		// Embed player graphics
-		[Embed(source='assets/player.png')]
-		private const PLAYER:Class;
-		private var playerSprite:Spritemap = new Spritemap(PLAYER,13,26);
+		// TODO implement multiple jumps (not just double jump)
+		private var isJumping:Boolean = false;
+		private var doubleJump:Boolean = false;
+		private var playerSprite:Spritemap = null;
 		
 		/**
 		 * Constructor
@@ -36,8 +32,9 @@ package
 			setHitbox(13,26);
 			this.x = x;
 			this.y = y;
-			playerSprite.add("goingLeft", [0], 1, false);
-			playerSprite.add("goingRight", [1], 1, false);
+			var spritemapcontainer:SpritemapContainer = 
+			        SpritemapContainer.getInstance();
+			playerSprite = spritemapcontainer.getSpritemap("Player");
 			graphic = playerSprite;
 		}
 		

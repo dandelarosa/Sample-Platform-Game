@@ -1,4 +1,5 @@
 package {
+	import net.flashpunk.FP;
 	import net.flashpunk.World;
 	
 	/**
@@ -6,13 +7,15 @@ package {
 	 */
 	public class PlatformWorld extends World 
 	{
+	    private var player:Player = new Player(100,100);
+	
 	    /**
 	     * Constructor
 	     */
 		public function PlatformWorld() 
 		{
 		    // Add the Player Character
-		    add(new Player(100, 100));
+		    add(player);
 		    
 		    // Add top and bottom walls
 		    for (var i:int = 0; i < 7; i++) 
@@ -31,5 +34,17 @@ package {
 			// A block in the middle to act as a platform
 		    add(new Wall(5, 4));
 		}
+		
+		/**
+		 * Update the entities each frame
+		 */
+		override public function update():void
+		{
+		    super.update();
+		    
+		    // Have the camera centered on the player
+			FP.camera.x = player.x - FP.halfWidth;
+			FP.camera.y = player.y - FP.halfHeight;
+	    }
 	}
 }
