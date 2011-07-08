@@ -30,6 +30,8 @@ package
 			FP.screen.scale = 2;
 			FP.world = new TitleScreen();
 			
+			//FP.console.enable();
+			
 			// Invoke the MochiBot tracker
 			MochiBot.track(this, "6f3254be");
 		}

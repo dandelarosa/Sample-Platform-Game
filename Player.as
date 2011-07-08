@@ -1,10 +1,10 @@
 package 
 {
 	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
-	import net.flashpunk.FP;
 	
 	/**
 	 * Player character for a platform game
