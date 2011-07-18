@@ -7,8 +7,8 @@ package
      */
     public class ImageContainer
     {	
-		[Embed(source='assets/wall.png')]
-		private const WALL:Class;
+        [Embed(source='assets/wall.png')]
+        private const WALL:Class;
         
         // This class is a singleton.
         private static var singleton:ImageContainer = new ImageContainer();
@@ -41,3 +41,4 @@ package
         }
     }
 }
+

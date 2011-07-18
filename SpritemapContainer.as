@@ -7,8 +7,8 @@ package
      */
     public class SpritemapContainer
     {	
-		[Embed(source='assets/player.png')]
-		private const PLAYER:Class;
+        [Embed(source='assets/player.png')]
+        private const PLAYER:Class;
         
         // This class is a singleton.
         private static var singleton:SpritemapContainer = 
@@ -33,7 +33,7 @@ package
                 {
                     var playerSprite:Spritemap = new Spritemap(PLAYER,13,26);
                     playerSprite.add("goingLeft", [0], 1, false);
-			        playerSprite.add("goingRight", [1], 1, false);
+                    playerSprite.add("goingRight", [1], 1, false);
                     return playerSprite;
                 }
                 
@@ -45,3 +45,4 @@ package
         }
     }
 }
+
