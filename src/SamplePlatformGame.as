@@ -1,4 +1,4 @@
-package 
+package src
 {
     import net.flashpunk.Engine;
     import net.flashpunk.FP;
@@ -15,7 +15,7 @@ package
         /**
          * Constructor
          */
-        public function Main() 
+        public function SamplePlatformGame() 
         {
             // For a game like a platformer we want have to a fixed framerate
             // so that collision detection can be more precise.
