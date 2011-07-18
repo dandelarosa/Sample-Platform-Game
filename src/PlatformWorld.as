@@ -25,20 +25,8 @@ package src
             add(cameraentity);
             
             // Camera Walls
-            var cwall:Entity = new Entity();
-            cwall.x = 0;
-            cwall.y = 0;
-            cwall.width = 1024;
-            cwall.height = 0;
-            cwall.type = "cameraWall";
-            add(cwall);
-            var cwall2:Entity = new Entity();
-            cwall2.x = 0;
-            cwall2.y = 0;
-            cwall2.width = 0;
-            cwall2.height = 1024;
-            cwall2.type = "cameraWall";
-            add(cwall2);
+            add(new CameraWall(0, 0, 1024, 0));
+            add(new CameraWall(0, 0, 0, 1024));
             
             // Add top and bottom walls
             for (var i:int = 0; i < 13; i++) 
