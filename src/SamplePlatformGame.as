@@ -2,7 +2,6 @@ package src
 {
     import net.flashpunk.Engine;
     import net.flashpunk.FP;
-    import src.TitleScreen;
     
     // SWF Export attributes
     [SWF(width = "512", height = "448", frameRate = "60")]
@@ -10,7 +9,7 @@ package src
     /**
      * Platformer Engine
      */
-    public class Main extends Engine 
+    public class SamplePlatformGame extends Engine 
     {
         /**
          * Constructor
@@ -31,11 +30,6 @@ package src
             FP.screen.color = 0x332222;
             FP.screen.scale = 2;
             FP.world = new TitleScreen();
-            
-            FP.console.enable();
-            
-            // Invoke the MochiBot tracker
-            MochiBot.track(this, "6f3254be");
         }
     }
 }
