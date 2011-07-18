@@ -1,4 +1,4 @@
-package 
+package src
 {
     import net.flashpunk.graphics.Spritemap;
     
@@ -7,7 +7,7 @@ package
      */
     public class SpritemapContainer
     {	
-        [Embed(source='assets/player.png')]
+        [Embed(source='../assets/player.png')]
         private const PLAYER:Class;
         
         // This class is a singleton.

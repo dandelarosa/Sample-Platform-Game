@@ -2,6 +2,7 @@ package
 {
     import net.flashpunk.Engine;
     import net.flashpunk.FP;
+    import src.TitleScreen;
     
     // SWF Export attributes
     [SWF(width = "512", height = "448", frameRate = "60")]

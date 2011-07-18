@@ -1,4 +1,5 @@
-package {
+package src
+{
     import net.flashpunk.Entity;
     import net.flashpunk.World;
     import net.flashpunk.FP;

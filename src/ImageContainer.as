@@ -1,4 +1,4 @@
-package 
+package src
 {
     import net.flashpunk.graphics.Image;
     
@@ -7,7 +7,7 @@ package
      */
     public class ImageContainer
     {	
-        [Embed(source='assets/wall.png')]
+        [Embed(source='../assets/wall.png')]
         private const WALL:Class;
         
         // This class is a singleton.
