@@ -8,14 +8,16 @@ package src
      */
     public class CameraEntity extends Entity 
     {
-        private var followedEntity:Entity = null;
+        private var followedEntity:IFollowableEntity = null;
         private var cameraStillX:Boolean = true;
         private var cameraStillY:Boolean = true;
-        private var cameraThresholdX:Number = 32;
+        private var cameraThresholdX:Number = 16;
         private var cameraThresholdY:Number = 32;
+        private var cameraAccelerationX:Number = 0.5;
+        private var cameraAccelerationY:Number = 0.5;
         private var xSpeed:Number = 0;
         private var ySpeed:Number = 0;
-        private var xSpeedMax:Number = 5;
+        private var xSpeedMax:Number = 20;
         private var ySpeedMax:Number = 2;
         
         /**
@@ -31,7 +33,7 @@ package src
         /**
          * Tell the camera to follow the entity
          */
-        public function follow(theEntity:Entity):void
+        public function follow(theEntity:IFollowableEntity):void
         {
             followedEntity = theEntity;
         }
@@ -46,20 +48,40 @@ package src
             if (followedEntity != null)
             {   
                 // Determine X camera speed
-                if (followedEntity.x - this.centerX == 0)
+                if (followedEntity.getX() - this.centerX == 0 && xSpeed == 0)
                 {
                     cameraStillX = true;
                 }
                 else
                 {
-                    if (Math.abs(followedEntity.x - this.centerX) 
-                            > cameraThresholdX)
+                    if (followedEntity.getX() - this.centerX > cameraThresholdX 
+                            && followedEntity.getXSpeed() > 0
+                            || followedEntity.getX() - this.centerX 
+                            < -cameraThresholdX 
+                            && followedEntity.getXSpeed() < 0)
                     {
                         cameraStillX = false;
                     }
                     if (!cameraStillX)
                     {
-                        xSpeed = followedEntity.x - this.centerX;
+                        if (Math.abs(followedEntity.getX() - this.centerX) 
+                                < Math.abs(this.xSpeed))
+                        {
+                            xSpeed = followedEntity.getX() - this.centerX;
+                        }
+                        else if (Math.abs(followedEntity.getXSpeed() - this.xSpeed) 
+                                < cameraAccelerationX)
+                        {
+                            xSpeed = followedEntity.getXSpeed();
+                        }
+                        else if (followedEntity.getX() - this.centerX < 0)
+                        {
+                            xSpeed -= cameraAccelerationX;
+                        }
+                        else
+                        {
+                            xSpeed += cameraAccelerationX;
+                        }
                         xSpeed = FP.clamp(xSpeed, -xSpeedMax, xSpeedMax);
                     }
                     else
@@ -69,20 +91,40 @@ package src
                 }
                 
 		        // Determine Y camera speed
-                if (followedEntity.y - this.centerY == 0)
+                if (followedEntity.getY() - this.centerY == 0 && ySpeed == 0)
                 {
                     cameraStillY = true;
                 }
                 else
                 {
-                    if (Math.abs(followedEntity.y - this.centerY) 
-                            > cameraThresholdY)
+                    if (followedEntity.getY() - this.centerY > cameraThresholdY 
+                            && followedEntity.getYSpeed() > 0
+                            || followedEntity.getY() - this.centerY 
+                            < -cameraThresholdY 
+                            && followedEntity.getYSpeed() < 0)
                     {
                         cameraStillY = false;
                     }
                     if (!cameraStillY)
                     {
-                        ySpeed = followedEntity.y - this.centerY;
+                        if (Math.abs(followedEntity.getY() - this.centerY) 
+                                < Math.abs(this.ySpeed))
+                        {
+                            ySpeed = followedEntity.getY() - this.centerY;
+                        }
+                        else if (Math.abs(followedEntity.getYSpeed() - this.ySpeed) 
+                                < cameraAccelerationY)
+                        {
+                            ySpeed = followedEntity.getYSpeed();
+                        }
+                        else if (followedEntity.getY() - this.centerY < 0)
+                        {
+                            ySpeed -= cameraAccelerationY;
+                        }
+                        else
+                        {
+                            ySpeed += cameraAccelerationY;
+                        }
                         ySpeed = FP.clamp(ySpeed, -ySpeedMax, ySpeedMax);
                     }
                     else
@@ -106,6 +148,7 @@ package src
         override public function moveCollideX(e:Entity):void
         {
             xSpeed = 0;
+            cameraStillX = true;
         }
         
         /**
@@ -114,6 +157,7 @@ package src
         override public function moveCollideY(e:Entity):void
         {
             ySpeed = 0;
+            cameraStillX = true;
         }
     }
 }
