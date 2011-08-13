@@ -9,17 +9,33 @@ package src
     public class CameraEntity extends Entity 
     {
         private var followedEntity:IFollowableEntity = null;
-        private var cameraStillX:Boolean = true;
-        private var cameraStillY:Boolean = true;
-        private var cameraThresholdX:Number = 16;
-        private var cameraThresholdY:Number = 32;
-        private var cameraAccelerationX:Number = 0.5;
-        private var cameraAccelerationY:Number = 0.5;
         private var xSpeed:Number = 0;
         private var ySpeed:Number = 0;
-        private var xSpeedMax:Number = 20;
-        private var ySpeedMax:Number = 2;
+        private var xSpeedMax:Number = 100;
+        private var ySpeedMax:Number = 100;
         
+        /*
+         * Right now the only camera functionality that works correctly is:
+         *  - Camera centers on the player (or other specified entity)
+         *  - "Camera Walls" that restrict the camera so that the camera won't,
+              for intstance, pan past the beginning or end of the level
+         */
+        /*
+         * The camera was planned to have more customizability, like detecting 
+         * whether the distance between the player and the camera reaches a 
+         * certain threshold before having the camera move. However, this lead 
+         * to several problems, such as the camera having jerky movement or 
+         * smooth movement that didn't react very quickly to player movement. 
+         * Therefore, such functionality will be disabled until it can be
+         * implemented correctly.
+         */
+        private var cameraStillX:Boolean = true;
+        private var cameraStillY:Boolean = true;
+        private var cameraThresholdX:Number = 0;
+        private var cameraThresholdY:Number = 0;
+        private var cameraAccelerationX:Number = 0.5;
+        private var cameraAccelerationY:Number = 0.5;
+         
         /**
          * Constructor
          */
@@ -48,7 +64,9 @@ package src
             if (followedEntity != null)
             {   
                 // Determine X camera speed
-                if (followedEntity.getX() - this.centerX == 0 && xSpeed == 0)
+                xSpeed = followedEntity.getX() - this.centerX;
+                xSpeed = FP.clamp(xSpeed, -xSpeedMax, xSpeedMax);
+                /*if (followedEntity.getX() - this.centerX == 0 && xSpeed == 0)
                 {
                     cameraStillX = true;
                 }
@@ -88,10 +106,12 @@ package src
                     {
                         xSpeed = 0;
                     }
-                }
+                }*/
                 
 		        // Determine Y camera speed
-                if (followedEntity.getY() - this.centerY == 0 && ySpeed == 0)
+		        ySpeed = followedEntity.getY() - this.centerY;
+                ySpeed = FP.clamp(ySpeed, -ySpeedMax, ySpeedMax);
+                /*if (followedEntity.getY() - this.centerY == 0 && ySpeed == 0)
                 {
                     cameraStillY = true;
                 }
@@ -131,7 +151,7 @@ package src
                     {
                         ySpeed = 0;
                     }
-                }
+                }*/
                 
                 // Move camera by the above speeds, barring collisions
                 moveBy(xSpeed, ySpeed, "cameraWall");
