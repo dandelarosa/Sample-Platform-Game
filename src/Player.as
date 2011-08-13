@@ -28,7 +28,7 @@ package src
         
         // Multi-jump functionality
         private var extraJumps:int = 0;
-        private var maxExtraJumps:int = 2;
+        private var maxExtraJumps:int = 2; // Set to negative for infinite jumps
         
         // Player spritemap
         private var playerSprite:Spritemap = null;
@@ -129,7 +129,8 @@ package src
                     ySpeed = -initialJumpSpeed;
                 }
             }
-            else if (Input.pressed(Key.UP) && extraJumps < maxExtraJumps)
+            else if (Input.pressed(Key.UP) && 
+                    (extraJumps < maxExtraJumps || maxExtraJumps < 0))
             {
                 // Jump in mid-air (if allowed to)
                 ySpeed = -initialJumpSpeed;
