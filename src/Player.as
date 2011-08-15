@@ -22,9 +22,15 @@ package src
         
         // Variables related to Y velocity
         private var ySpeed:Number = 0;
-        private var gravity:Number = 0.3;
+        private var regularGravity:Number = 0.3;
         private var initialJumpSpeed:Number = 5;
         private var maxFallingSpeed:Number = 5;
+        
+        // Allows for higher jumps when the jump button is held or 
+        // "shorthopping" if the jump button is quickly released
+        private var jumpButtonHeldGravity:Number = 0.2;
+        private var jumpButtonHeldDuration:int = 0;
+        private const jumpButtonHeldMaxDuration:int = 30;
         
         // Multi-jump functionality
         private var extraJumps:int = 0;
@@ -122,6 +128,7 @@ package src
                 // Player is on the ground
                 ySpeed = 0;
                 extraJumps = 0;
+                jumpButtonHeldDuration = 0;
                 
                 // Player jumps from ground
                 if (Input.pressed(Key.UP))
@@ -135,11 +142,23 @@ package src
                 // Jump in mid-air (if allowed to)
                 ySpeed = -initialJumpSpeed;
                 extraJumps++;
+                jumpButtonHeldDuration = 0;
+            }
+            else if (Input.check(Key.UP) && 
+                    jumpButtonHeldDuration < jumpButtonHeldMaxDuration)
+            {
+                // Rise up for longer if the jump button is held
+                ySpeed += jumpButtonHeldGravity;
+                if (ySpeed > maxFallingSpeed)
+                {
+                    ySpeed = maxFallingSpeed;
+                }
+                jumpButtonHeldDuration++;
             }
             else
             {
                 // In all other cases, just free-fall
-                ySpeed += gravity;
+                ySpeed += regularGravity;
                 if (ySpeed > maxFallingSpeed)
                 {
                     ySpeed = maxFallingSpeed;
