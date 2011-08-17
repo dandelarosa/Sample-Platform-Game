@@ -14,11 +14,11 @@ package src
         // Variables related to X velocity
         private var xSpeed:Number = 0;
         private var runAcceleration:Number = 0.2;
-        private var maxRunningSpeed:Number = 5;
+        private var maxRunningSpeed:Number = 3;
         private var groundDeceleration:Number = 0.5;
         private var airAcceleration:Number = 0.1;
-        private var maxAirSpeed:Number = 2;
-        private var airDeceleration:Number = 0;
+        private var maxAirSpeed:Number = maxRunningSpeed;
+        private var airDeceleration:Number = 0.2;
         
         // Variables related to Y velocity
         private var ySpeed:Number = 0;
@@ -34,7 +34,7 @@ package src
         
         // Multi-jump functionality
         private var extraJumps:int = 0;
-        private var maxExtraJumps:int = 2; // Set to negative for infinite jumps
+        private var maxExtraJumps:int = 0; // Set to negative for infinite jumps
         
         // Player spritemap
         private var playerSprite:Spritemap = null;
