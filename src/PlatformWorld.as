@@ -25,25 +25,27 @@ package src
             add(cameraentity);
             
             // Camera Walls
-            add(new CameraWall(0, 0, 1024, 0));
-            add(new CameraWall(0, 0, 0, 1024));
+            add(new CameraWall(0, 0, 1024, 0)); // Top wall
+            add(new CameraWall(0, 0, 0, 224)); // Leftmost wall
+            add(new CameraWall(0, 224, 1024, 0)); // Bottom wall
+            add(new CameraWall(1024, 0, 0, 224)); // Rightmost wall
             
-            // Add top and bottom walls
-            for (var i:int = 0; i < 13; i++) 
+            for (var i:int = 0; i < 32; i++) 
             {
-                //add(new Wall(i, 0));
+                // Bottom Wall
                 add(new Wall(i, 6));
             }
             
-            // Add left and right walls
-            for (i = 0; i < 14; i++) 
+            for (i = 0; i < 7; i++) 
             {
-                add(new Wall(0, i));
-                add(new Wall(13, i));
+                // Left wall
+                add(new Wall(-1, i));
+                // Right wall
+                add(new Wall(32, i));
             }
             
             // A block in the middle to act as a platform
-            add(new Wall(5, 4));
+            //add(new Wall(5, 4));
         }
         
         /**
