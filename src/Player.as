@@ -39,6 +39,10 @@ package src
         // Player spritemap
         private var playerSprite:Spritemap = null;
         
+        // Type of objects the player can collide with
+        private static const collideableTypes:Array = 
+                new Array("wall", "enemy");
+        
         /**
          * Constructor
          */
@@ -166,7 +170,7 @@ package src
             }
             
             // Apply new speed, taking account collisions with walls
-            moveBy(xSpeed, ySpeed, "wall");
+            moveBy(xSpeed, ySpeed, collideableTypes);
             
             // Apply new image
             if(xSpeed > 0)
@@ -191,17 +195,19 @@ package src
         /**
          * Process collisions while moving in the x direction
          */
-        override public function moveCollideX(e:Entity):void
+        override public function moveCollideX(e:Entity):Boolean
         {
             xSpeed = 0;
+            return true;
         }
         
         /**
          * Process collisions while moving in the y direction
          */
-        override public function moveCollideY(e:Entity):void
+        override public function moveCollideY(e:Entity):Boolean
         {
             ySpeed = 0;
+            return true;
         }
         
         /**

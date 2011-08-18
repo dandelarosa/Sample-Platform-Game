@@ -165,19 +165,21 @@ package src
         /**
          * Process collisions while moving in the x direction
          */
-        override public function moveCollideX(e:Entity):void
+        override public function moveCollideX(e:Entity):Boolean
         {
             xSpeed = 0;
             cameraStillX = true;
+            return true;
         }
         
         /**
          * Process collisions while moving in the y direction
          */
-        override public function moveCollideY(e:Entity):void
+        override public function moveCollideY(e:Entity):Boolean
         {
             ySpeed = 0;
             cameraStillX = true;
+            return true;
         }
     }
 }
