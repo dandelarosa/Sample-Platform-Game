@@ -46,6 +46,9 @@ package src
             
             // A block in the middle to act as a platform
             //add(new Wall(5, 4));
+            
+            // Create an enemy
+            add(new Enemy(512, 166));
         }
         
         /**
