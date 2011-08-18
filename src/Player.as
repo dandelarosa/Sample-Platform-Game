@@ -181,6 +181,12 @@ package src
             {
                 playerSprite.play("goingLeft");
             }
+            
+            // Kill the player if it hits an enemy without killing it first
+            if(collide("enemy", x, y))
+            {
+                FP.world.remove(this);
+            }
         }
         
         /*
@@ -206,7 +212,18 @@ package src
          */
         override public function moveCollideY(e:Entity):Boolean
         {
-            ySpeed = 0;
+            if (e is Enemy)
+            {
+                if (ySpeed > 0)
+                {
+                    // Kill the enemy if the player is hitting it from above
+                    FP.world.remove(e);
+                }
+            }
+            else
+            {
+                ySpeed = 0;
+            }
             return true;
         }
         
