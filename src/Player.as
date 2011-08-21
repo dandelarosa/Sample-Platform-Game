@@ -185,6 +185,13 @@ package src
                 playerSprite.play("goingLeft");
             }
             
+            // End the level if the player hits the goal
+            if(collide("goal", x, y))
+            {
+                // For now, just go to the title screen
+                FP.world = new TitleScreen();
+            }
+            
             // Kill the player if it hits an enemy without killing it first
             if(collide("enemy", x, y))
             {

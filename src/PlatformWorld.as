@@ -51,6 +51,9 @@ package src
             
             // Create an enemy
             add(new Enemy(512, 166));
+            
+            // Goal object
+            add(new Goal(30, 4));
         }
         
         /**
