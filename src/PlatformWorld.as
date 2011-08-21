@@ -11,6 +11,8 @@ package src
     {
         private var player:Player = new Player(100,100);
         private var cameraentity:CameraEntity = new CameraEntity(0, 0);
+        private var deathRestartTimer:int = 0;
+        private const deathRestartDelay:int = 30; // In frames
         
         /**
          * Constructor
@@ -57,6 +59,18 @@ package src
         override public function update():void
         {
             super.update();
+            
+            if(!player.isAlive)
+            {
+                if (deathRestartTimer < deathRestartDelay)
+                {
+                    deathRestartTimer++;
+                }
+                else
+                {
+                    FP.world = new PlatformWorld();
+                }
+            }
             
             // This is to ensure the camera refers to the updated states of the 
             // entities for this frame otherwise the camera will behave

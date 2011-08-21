@@ -43,6 +43,9 @@ package src
         private static const collideableTypes:Array = 
                 new Array("wall", "enemy");
         
+        // Player status
+        public var isAlive:Boolean = true;
+        
         /**
          * Constructor
          */
@@ -186,6 +189,7 @@ package src
             if(collide("enemy", x, y))
             {
                 FP.world.remove(this);
+                this.isAlive = false;
             }
         }
         
