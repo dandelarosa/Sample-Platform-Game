@@ -1,8 +1,9 @@
-FLEXDIR = ~/Applications/flex_sdk/
+FLEXDIR = ~/Applications/flex_sdk
+ALLFLAGS = -source-path FlashPunk
 DEBUG = Debug
-DEBUGFLAGS = -static-link-runtime-shared-libraries -use-network=false
+DEBUGFLAGS = $(ALLFLAGS) -static-link-runtime-shared-libraries -use-network=false
 RELEASE = Release
-RELEASEFLAGS = -static-link-runtime-shared-libraries -use-network=true
+RELEASEFLAGS = $(ALLFLAGS) -static-link-runtime-shared-libraries -use-network=true
 
 debug:
 	$(FLEXDIR)/bin/mxmlc $(DEBUG).as $(DEBUGFLAGS)
