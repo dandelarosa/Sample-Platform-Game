@@ -1,6 +1,7 @@
 package
 {
     import net.flashpunk.FP;
+    import src.FileReader;
     import src.SamplePlatformGame;
     
     /**
@@ -22,6 +23,9 @@ package
             
             // Use the FlashPunk debug console
             FP.console.enable();
+            var file:FileReader = new FileReader();
+            //var fileContents:String = FileReader.readTextFile("sample.txt");
+            //FP.console.log(fileContents);
         }
     }
 }
