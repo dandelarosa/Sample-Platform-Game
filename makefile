@@ -1,4 +1,4 @@
-FLEXDIR = ~/Applications/flex_sdk
+FLEXDIR = ~/Downloads/flex_sdk_4.6
 ALLFLAGS = -source-path FlashPunk
 DEBUG = Debug
 DEBUGFLAGS = $(ALLFLAGS) -static-link-runtime-shared-libraries -debug=true -use-network=false
